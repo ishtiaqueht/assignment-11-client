@@ -1,0 +1,43 @@
+import { createBrowserRouter } from "react-router";
+import MainLayout from "../layouts/MainLayout";
+import Home from "../pages/home/Home";
+import Events from "../pages/events/Events";
+import EventDetails from "../pages/eventdetails/EventDetails";
+import MakeEvent from "../pages/makeEvent/MakeEvent";
+import MyBookings from "../pages/MyBookings/MyBookings";
+import ManageEvents from "../pages/ManageEvents/ManageEvents";
+import UpdateEvent from "../pages/UpdateEvent/UpdateEvent";
+import NotFound from "../pages/NotFound";
+import Login from "../pages/Auth/Login";
+import Register from "../pages/Auth/Register";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />, 
+    children: [
+      { index: true, element: <Home /> },
+      { path: "events", element: <Events /> },
+      { path: "events/:id", element: <EventDetails /> },
+      {
+        path: "create-event",
+        element: <MakeEvent />,
+      },
+      {
+        path: "myBookings",
+        element: <MyBookings />,
+      },
+      {
+        path: "manageEvents",
+        element: <ManageEvents />,
+      },
+      {
+        path: "updateEvent/:id",
+        element: <UpdateEvent />,
+      },
+      { path: "*", element: <NotFound /> },
+    ],
+  },
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
+]);

@@ -75,7 +75,7 @@ const Navbar = () => {
         </NavLink>
         <NavLink
           to="/register"
-          className="btn bg-orange-500 hover:bg-orange-600 text-white btn-sm md:btn-md"
+          className="btn bg-orange-900 hover:bg-orange-300 text-white btn-sm md:btn-md"
         >
           Register
         </NavLink>

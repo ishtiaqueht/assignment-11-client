@@ -10,34 +10,52 @@ import UpdateEvent from "../pages/UpdateEvent/UpdateEvent";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import PrivateRouter from "./PrivateRouter";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />, 
+    element: <MainLayout />,
     children: [
       { index: true, element: <Home /> },
       { path: "events", element: <Events /> },
       { path: "events/:id", element: <EventDetails /> },
       {
         path: "make-event",
-        element: <MakeEvent />,
+        element: (
+          <PrivateRouter>
+            <MakeEvent />
+          </PrivateRouter>
+        ),
       },
       {
         path: "myBookings",
-        element: <MyBookings />,
+        element: (
+          <PrivateRouter>
+            <MyBookings />
+          </PrivateRouter>
+        ),
       },
       {
         path: "manageEvents",
-        element: <ManageEvents />,
+        element: (
+          <PrivateRouter>
+            <ManageEvents />
+          </PrivateRouter>
+        ),
       },
       {
         path: "updateEvent/:id",
-        element: <UpdateEvent />,
+        element: (
+          <PrivateRouter>
+            <UpdateEvent />
+          </PrivateRouter>
+        ),
       },
       { path: "*", element: <NotFound /> },
+
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
     ],
   },
-  { path: "/login", element: <Login /> },
-  { path: "/register", element: <Register /> },
 ]);

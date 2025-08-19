@@ -7,5 +7,5 @@
 
 a.active {
   @apply border-b-2 border-t-2 border-blue-500;
-  @apply text-blue-700;
+  @apply text-orange-400;
 }

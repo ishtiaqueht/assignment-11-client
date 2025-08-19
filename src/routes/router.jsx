@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
       { path: "events", element: <Events /> },
       { path: "events/:id", element: <EventDetails /> },
       {
-        path: "create-event",
+        path: "make-event",
         element: <MakeEvent />,
       },
       {

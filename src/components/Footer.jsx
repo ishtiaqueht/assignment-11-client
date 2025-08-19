@@ -1,10 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router";
+import { FaFacebookF, FaGithub, FaLinkedinIn, FaPhoneAlt, FaTelegram } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 text-white py-12 mt-12">
-  <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 text-white py-4 mt-4">
+  <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-16">
     {/* Left side - Branding */}
     <div>
       <h2 className="text-2xl font-bold">AthleticClub</h2>
@@ -43,19 +45,34 @@ const Footer = () => {
     {/* Right side - Social + Contact */}
     <div>
       <h3 className="text-lg font-semibold mb-3">Stay Connected</h3>
-      <div className="flex gap-4 mb-4">
-        <a href="#" className="hover:text-orange-400 transition-colors">
-          <i className="fab fa-facebook text-xl"></i>
-        </a>
-        <a href="#" className="hover:text-orange-400 transition-colors">
-          <i className="fab fa-twitter text-xl"></i>
-        </a>
-        <a href="#" className="hover:text-orange-400 transition-colors">
-          <i className="fab fa-instagram text-xl"></i>
-        </a>
-      </div>
-      <p className="text-gray-200 text-sm">📧 ishtiaqueht@gmail.com</p>
-      <p className="text-gray-200 text-sm">📞 +880 1787 127080</p>
+       <div className="flex gap-4 text-lg mb-5">
+              <a
+                href="https://www.facebook.com/ishtiaque.hossaintanbin.1"
+                className="p-2 rounded-full bg-base-content hover:bg-blue-600 transition"
+              >
+                <FaFacebookF />
+              </a>
+              <a
+                href="https://t.me/Ishtiaque_HT"
+                className="p-2 rounded-full bg-base-content hover:bg-sky-400 transition"
+              >
+                <FaTelegram />
+              </a>
+              <a
+                href="https://github.com/"
+                className="p-2 rounded-full bg-base-content hover:bg-gray-700 transition"
+              >
+                <FaGithub />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ishtiaqueht/"
+                className="p-2 rounded-full bg-base-content hover:bg-blue-500 transition"
+              >
+                <FaLinkedinIn />
+              </a>
+            </div>
+      <p className="text-gray-200 text-sm flex items-center gap-2"><MdEmail/> ishtiaqueht@gmail.com</p>
+      <p className="text-gray-200 text-sm flex items-center gap-2"><FaPhoneAlt /> +880 1787 127080</p>
     </div>
   </div>
 

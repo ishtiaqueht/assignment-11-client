@@ -3,13 +3,14 @@ import { Link } from "react-router";
 import axios from "axios";
 import { MdOutlineDateRange } from "react-icons/md";
 import { FaMapPin } from "react-icons/fa";
+
 const EventsPage = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:3000/events") 
+    axios.get("http://localhost:3000/events")
       .then(res => setEvents(res.data))
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
@@ -17,8 +18,8 @@ const EventsPage = () => {
 
   // Search Filter
   const filteredEvents = events.filter(event =>
-    event.name.toLowerCase().includes(search.toLowerCase()) ||
-    event.location.toLowerCase().includes(search.toLowerCase())
+    (event.eventName || event.name)?.toLowerCase().includes(search.toLowerCase()) ||
+    (event.location || event.place)?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -46,22 +47,30 @@ const EventsPage = () => {
             key={event._id}
             className="bg-white border rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
           >
+            {/* Event Image with fallback */}
             <img
-              src={event.image}
-              alt={event.name}
+              src={event.picture || event.image || "https://via.placeholder.com/400x200"}
+              alt={event.eventName || event.name || "Event"}
               className="h-48 w-full object-cover"
             />
 
             <div className="p-4">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">{event.name}</h2>
+              <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                {event.eventName || event.name || "Untitled Event"}
+              </h2>
 
+              {/* Event Date with fallback */}
               <p className="text-gray-600 flex items-center gap-2 mb-1">
                 <MdOutlineDateRange className="text-blue-500" />
-                {new Date(event.date).toLocaleDateString()}
+                {event.eventDate || event.date
+                  ? new Date(event.eventDate || event.date).toLocaleDateString()
+                  : "Date not available"}
               </p>
+
+              {/* Event Location with fallback */}
               <p className="text-gray-600 flex items-center gap-2 mb-3">
                 <FaMapPin className="text-red-500" />
-                {event.location}
+                {event.location || event.place || "Location not available"}
               </p>
 
               <Link
@@ -84,5 +93,3 @@ const EventsPage = () => {
 };
 
 export default EventsPage;
-
-

@@ -31,61 +31,93 @@ const EventsPage = () => {
 
   return (
     <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">All Events</h1>
+  {/* Title */}
+  <h1 className="text-3xl md:text-4xl font-extrabold mb-8 text-center 
+                 text-transparent bg-clip-text 
+                 bg-gradient-to-r from-blue-500 to-indigo-600">
+     All Events
+  </h1>
 
-      <div className="mb-8 flex justify-center">
-        <input
-          type="text"
-          placeholder="🔍 Search by name or location..."
-          className="border border-gray-300 rounded-full px-4 py-2 w-full md:w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-400 shadow-sm"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
+  {/* Search Box */}
+  <div className="mb-10 flex justify-center">
+    <input
+      type="text"
+      placeholder="🔍 Search events by name or location..."
+      className="border border-gray-200 rounded-full px-5 py-3 w-full md:w-2/3 
+                 shadow-sm focus:outline-none focus:ring-2 
+                 focus:ring-blue-400 focus:border-blue-300 
+                 transition duration-300"
+      value={search}
+      onChange={(e) => setSearch(e.target.value)}
+    />
+  </div>
 
-      {loading && <p className="text-center">Loading events...</p>}
+  {loading && <p className="text-center text-gray-500 animate-pulse">Loading events...</p>}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredEvents.map(event => (
-          <div
-            key={event._id}
-            className="bg-white border rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
+  {/* Event Cards */}
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {filteredEvents.map(event => (
+      <div
+        key={event._id}
+        className="bg-white border border-gray-100 rounded-2xl 
+                   shadow-md hover:shadow-2xl overflow-hidden 
+                   transform hover:-translate-y-2 
+                   transition duration-300"
+      >
+        {/* Image */}
+        <div className="relative">
+          <img
+            src={event.imageUrl || "https://via.placeholder.com/400x200"}
+            alt={event.eventName || "Event"}
+            className="h-52 w-full object-cover"
+          />
+          <span className="absolute top-3 left-3 bg-gradient-to-r from-blue-500 to-indigo-600 
+                           text-white text-xs font-medium px-3 py-1 rounded-full shadow-md">
+            {event.eventType || "General"}
+          </span>
+        </div>
+
+        {/* Card Content */}
+        <div className="p-5">
+          <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-2 line-clamp-1">
+            {event.eventName || "Untitled Event"}
+          </h2>
+
+          <p className="text-gray-600 flex items-center gap-2 mb-2 text-sm">
+            <MdOutlineDateRange className="text-blue-500" />
+            {event.eventDate
+              ? new Date(event.eventDate).toLocaleDateString()
+              : "Date not available"}
+          </p>
+
+          <p className="text-gray-600 flex items-center gap-2 mb-4 text-sm">
+            <FaMapPin className="text-red-500" />
+            {event.location || "Location not available"}
+          </p>
+
+          <Link
+            to={`/events/${event._id}`}
+            className="block w-full text-center font-medium 
+                       bg-gradient-to-r from-blue-500 to-indigo-600 
+                       text-white px-4 py-2.5 rounded-xl 
+                       hover:from-indigo-600 hover:to-blue-700 
+                       transition duration-300 shadow-md"
           >
-            <img
-              src={event.imageUrl  || "https://via.placeholder.com/400x200"}
-              alt={event.eventName || "Event"}
-              className="h-48 w-full object-cover"
-            />
-            <div className="p-4">
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {event.eventName || "Untitled Event"}
-              </h2>
-
-              <p className="text-gray-600 flex items-center gap-2 mb-1">
-                <MdOutlineDateRange className="text-blue-500" />
-                {event.eventDate ? new Date(event.eventDate).toLocaleDateString() : "Date not available"}
-              </p>
-
-              <p className="text-gray-600 flex items-center gap-2 mb-3">
-                <FaMapPin className="text-red-500" />
-                {event.location || "Location not available"}
-              </p>
-
-              <Link
-                to={`/events/${event._id}`}
-                className="inline-block w-full text-center bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg hover:from-blue-600 hover:to-blue-700 transition"
-              >
-                View Details
-              </Link>
-            </div>
-          </div>
-        ))}
+            View Details
+          </Link>
+        </div>
       </div>
+    ))}
+  </div>
 
-      {!loading && filteredEvents.length === 0 && (
-        <p className="text-center mt-10 text-gray-500 text-lg">🚫 No events found.</p>
-      )}
-    </div>
+  {/* No Events */}
+  {!loading && filteredEvents.length === 0 && (
+    <p className="text-center mt-12 text-gray-400 text-lg">
+      🚫 No events found. Try another search.
+    </p>
+  )}
+</div>
+
   );
 };
 

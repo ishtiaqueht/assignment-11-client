@@ -20,7 +20,7 @@ const FeaturedEvents = () => {
     <section className="py-12 px-6 bg-gray-50">
   <div className="max-w-6xl mx-auto text-center">
     {/* Section Title */}
-    <h2 className="text-3xl font-extrabold text-indigo-800 mb-2">
+    <h2 className="text-3xl font-extrabold text-indigo-600 mb-2">
       Featured Events
     </h2>
     <p className="text-gray-500 mb-10">

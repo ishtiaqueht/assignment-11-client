@@ -17,29 +17,33 @@ const EventDetails = () => {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const handleBooking = async () => {
-    if (!user) {
-      alert("Please login to book this event!");
-      return;
+ const handleBooking = async () => {
+  if (!user) {
+    alert("Please login to book this event!");
+    return;
+  }
+
+  try {
+    const bookingData = {
+      eventId: event._id,
+      eventName: event.eventName || event.name,
+      eventDate: event.eventDate || event.date,
+      location: event.location || event.place,
+      description: event.description,
+      userEmail: user.email,
+    };
+
+    const res = await axios.post("http://localhost:3000/bookings", bookingData);
+
+    if (res.data.insertedId) {
+      setSuccess("✅ Booking successful!");
     }
+  } catch (error) {
+    console.error(error);
+    setSuccess("❌ Something went wrong!");
+  }
+};
 
-    try {
-      // clone event & inject email
-      const bookingData = {
-        ...event,
-        user_email: user.email,
-      };
-
-      const res = await axios.post("http://localhost:3000/bookings", bookingData);
-
-      if (res.data.insertedId) {
-        setSuccess("✅ Booking successful!");
-      }
-    } catch (error) {
-      console.error(error);
-      setSuccess("❌ Something went wrong!");
-    }
-  };
 
   if (loading) return <p className="text-center mt-10">Loading event details...</p>;
 

@@ -87,7 +87,7 @@ const Navbar = () => {
           <label
             tabIndex={0}
             className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom"
-            data-tip={user.email}
+            data-tip={user.displayName}
           >
             <div className="w-8 md:w-10 rounded-full ring ring-blue-500 ring-offset-2">
               <img

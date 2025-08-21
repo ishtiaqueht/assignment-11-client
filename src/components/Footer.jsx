@@ -5,7 +5,7 @@ import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 text-white py-4 mt-4">
+    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white py-4 mt-4">
   <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-16">
     {/* Left side - Branding */}
     <div>

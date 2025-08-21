@@ -24,7 +24,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-gray-50 shadow-md px-6 sticky top-0 z-50">
+    <div className="navbar bg-gradient-to-br from-gray-900 via-gray-800 to-black shadow-md px-6 sticky top-0 z-50">
   {/* Left side - Logo */}
   <div className="navbar-start">
     {/* Small device menu button */}

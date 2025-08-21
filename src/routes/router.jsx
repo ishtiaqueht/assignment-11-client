@@ -19,7 +19,14 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "events", element: <Events /> },
-      { path: "events/:id", element: <EventDetails /> },
+      {
+        path: "events/:id",
+        element: (
+          <PrivateRouter>
+            <EventDetails />
+          </PrivateRouter>
+        ),
+      },
       {
         path: "make-event",
         element: (

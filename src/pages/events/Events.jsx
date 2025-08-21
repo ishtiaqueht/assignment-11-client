@@ -9,24 +9,30 @@ const EventsPage = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
+  const fetchEvents = async () => {
+    try {
+      const res = await axios.get("http://localhost:3000/events");
+      setEvents(res.data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    axios.get("http://localhost:3000/events")
-      .then(res => setEvents(res.data))
-      .catch(err => console.error(err))
-      .finally(() => setLoading(false));
+    fetchEvents();
   }, []);
 
-  // Search Filter
   const filteredEvents = events.filter(event =>
-    (event.eventName || event.name)?.toLowerCase().includes(search.toLowerCase()) ||
-    (event.location || event.place)?.toLowerCase().includes(search.toLowerCase())
+    (event.eventName || "").toLowerCase().includes(search.toLowerCase()) ||
+    (event.location || "").toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">All Events</h1>
 
-      {/* Search Box */}
       <div className="mb-8 flex justify-center">
         <input
           type="text"
@@ -37,40 +43,32 @@ const EventsPage = () => {
         />
       </div>
 
-      {/* Loading */}
       {loading && <p className="text-center">Loading events...</p>}
 
-      {/* Events Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredEvents.map(event => (
           <div
             key={event._id}
             className="bg-white border rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300"
           >
-            {/* Event Image with fallback */}
             <img
-              src={event.picture || event.image || "https://via.placeholder.com/400x200"}
-              alt={event.eventName || event.name || "Event"}
+              src={event.imageUrl  || "https://via.placeholder.com/400x200"}
+              alt={event.eventName || "Event"}
               className="h-48 w-full object-cover"
             />
-
             <div className="p-4">
               <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {event.eventName || event.name || "Untitled Event"}
+                {event.eventName || "Untitled Event"}
               </h2>
 
-              {/* Event Date with fallback */}
               <p className="text-gray-600 flex items-center gap-2 mb-1">
                 <MdOutlineDateRange className="text-blue-500" />
-                {event.eventDate || event.date
-                  ? new Date(event.eventDate || event.date).toLocaleDateString()
-                  : "Date not available"}
+                {event.eventDate ? new Date(event.eventDate).toLocaleDateString() : "Date not available"}
               </p>
 
-              {/* Event Location with fallback */}
               <p className="text-gray-600 flex items-center gap-2 mb-3">
                 <FaMapPin className="text-red-500" />
-                {event.location || event.place || "Location not available"}
+                {event.location || "Location not available"}
               </p>
 
               <Link
@@ -84,7 +82,6 @@ const EventsPage = () => {
         ))}
       </div>
 
-      {/* Empty State */}
       {!loading && filteredEvents.length === 0 && (
         <p className="text-center mt-10 text-gray-500 text-lg">🚫 No events found.</p>
       )}

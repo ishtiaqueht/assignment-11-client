@@ -12,8 +12,8 @@ const MakeEvent = () => {
     eventType: "",
     eventDate: "",
     description: "",
-    picture: "",
-    location: "",           
+    imageUrl: "",
+    location: "",
     creatorEmail: user?.email || "",
     creatorName: user?.displayName || "",
   });
@@ -53,7 +53,9 @@ const MakeEvent = () => {
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Event Name */}
         <div>
-          <label className="block font-medium text-gray-700 mb-2">Event Name</label>
+          <label className="block font-medium text-gray-700 mb-2">
+            Event Name
+          </label>
           <input
             type="text"
             name="eventName"
@@ -67,7 +69,9 @@ const MakeEvent = () => {
 
         {/* Event Type */}
         <div>
-          <label className="block font-medium text-gray-700 mb-2">Event Type</label>
+          <label className="block font-medium text-gray-700 mb-2">
+            Event Type
+          </label>
           <select
             name="eventType"
             value={formData.eventType}
@@ -87,7 +91,9 @@ const MakeEvent = () => {
 
         {/* Event Date */}
         <div>
-          <label className="block font-medium text-gray-700 mb-2">Event Date</label>
+          <label className="block font-medium text-gray-700 mb-2">
+            Event Date
+          </label>
           <input
             type="date"
             name="eventDate"
@@ -100,7 +106,9 @@ const MakeEvent = () => {
 
         {/* Description */}
         <div>
-          <label className="block font-medium text-gray-700 mb-2">Description</label>
+          <label className="block font-medium text-gray-700 mb-2">
+            Description
+          </label>
           <textarea
             name="description"
             value={formData.description}
@@ -114,11 +122,13 @@ const MakeEvent = () => {
 
         {/* Picture */}
         <div>
-          <label className="block font-medium text-gray-700 mb-2">Event Image (URL)</label>
+          <label className="block font-medium text-gray-700 mb-2">
+            Event Image (URL)
+          </label>
           <input
             type="url"
-            name="picture"
-            value={formData.picture}
+            name="imageUrl"
+            value={formData.imageUrl}
             onChange={handleChange}
             required
             className="w-full px-4 py-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 transition"
@@ -128,7 +138,9 @@ const MakeEvent = () => {
 
         {/* Location */}
         <div>
-          <label className="block font-medium text-gray-700 mb-2">Location</label>
+          <label className="block font-medium text-gray-700 mb-2">
+            Location
+          </label>
           <input
             type="text"
             name="location"
@@ -143,7 +155,9 @@ const MakeEvent = () => {
         {/* Creator Info */}
         <div className="grid md:grid-cols-2 gap-6">
           <div>
-            <label className="block font-medium text-gray-700 mb-2">Creator Email</label>
+            <label className="block font-medium text-gray-700 mb-2">
+              Creator Email
+            </label>
             <input
               type="email"
               value={formData.creatorEmail}
@@ -152,7 +166,9 @@ const MakeEvent = () => {
             />
           </div>
           <div>
-            <label className="block font-medium text-gray-700 mb-2">Creator Name</label>
+            <label className="block font-medium text-gray-700 mb-2">
+              Creator Name
+            </label>
             <input
               type="text"
               value={formData.creatorName}

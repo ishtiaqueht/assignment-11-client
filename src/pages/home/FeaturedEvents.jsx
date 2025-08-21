@@ -36,18 +36,18 @@ const FeaturedEvents = () => {
         >
           {/* Event Image */}
           <img
-            src={event.image}
-            alt={event.name}
+            src={event.imageUrl}
+            alt={event.eventName}
             className="h-48 w-full object-cover"
           />
 
           {/* Event Content */}
           <div className="p-5 text-left">
             <h3 className="text-xl font-bold text-gray-800 mb-2">
-              {event.name}
+              {event.eventName}
             </h3>
             <p className="text-sm text-gray-500 mb-1 flex items-center gap-2">
-              <FaCalendarAlt/> {new Date(event.date).toLocaleDateString()}
+              <FaCalendarAlt/> {new Date(event.eventDate).toLocaleDateString()}
             </p>
             <p className="text-sm text-gray-500 mb-4 flex items-center gap-2"><FaMapPin/> {event.location}</p>
 

@@ -54,45 +54,57 @@ const ManageEvents = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-  <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 text-center bg-gradient-to-r from-indigo-600 to-purple-500 bg-clip-text text-transparent">
+    <div className="max-w-6xl mx-auto p-4 sm:p-6 md:p-8 mt-10 bg-gradient-to-br from-gray-900 via-gray-800 to-black rounded-2xl shadow-2xl border border-gray-700">
+  <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-8 text-center bg-gradient-to-r from-indigo-400 to-cyan-400 text-transparent bg-clip-text">
     My Created Events
   </h1>
 
   {events.length === 0 ? (
-    <p className="text-gray-500 text-center mt-10 text-lg">No events created yet.</p>
+    <p className="text-gray-400 text-center mt-10 text-base sm:text-lg">
+      No events created yet.
+    </p>
   ) : (
-    <div className="overflow-x-auto">
-      <table className="min-w-full bg-white rounded-2xl shadow-xl overflow-hidden">
-        <thead className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white">
-          <tr>
-            <th className="py-4 px-6 text-left font-medium uppercase tracking-wide">Event Name</th>
-            <th className="py-4 px-6 text-left font-medium uppercase tracking-wide">Date</th>
-            <th className="py-4 px-6 text-left font-medium uppercase tracking-wide">Type</th>
-            <th className="py-4 px-6 text-center font-medium uppercase tracking-wide">Actions</th>
+    <div className="overflow-x-auto rounded-2xl shadow-lg">
+      <table className="w-full border-collapse text-sm sm:text-base">
+        <thead>
+          <tr className="bg-gradient-to-r from-indigo-600 to-cyan-600 text-white">
+            <th className="p-3 sm:p-4 text-left">Event Name</th>
+            <th className="p-3 sm:p-4 text-left">Date</th>
+            <th className="p-3 sm:p-4 text-left">Type</th>
+            <th className="p-3 sm:p-4 text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {events.map((event) => (
+          {events.map((event, index) => (
             <tr
               key={event._id}
-              className="border-b last:border-b-0 hover:bg-indigo-50 transition duration-300"
+              className={`transition duration-300 ${
+                index % 2 === 0 ? "bg-gray-800/40" : "bg-gray-900/40"
+              } hover:bg-gray-800/70`}
             >
-              <td className="py-4 px-6 font-semibold text-gray-800">{event.eventName}</td>
-              <td className="py-4 px-6 text-gray-600">
+              <td className="p-3 sm:p-4 font-semibold text-indigo-300">
+                {event.eventName}
+              </td>
+              <td className="p-3 sm:p-4 text-gray-300">
                 {new Date(event.eventDate).toLocaleDateString()}
               </td>
-              <td className="py-4 px-6 text-gray-600">{event.eventType}</td>
-              <td className="py-4 px-6 flex gap-3 justify-center">
+              <td className="p-3 sm:p-4 text-gray-300">{event.eventType}</td>
+              <td className="p-3 sm:p-4 flex gap-2 sm:gap-3 justify-center flex-wrap">
                 <button
                   onClick={() => handleUpdate(event._id)}
-                  className="px-5 py-2 bg-green-500 hover:bg-green-600 text-white rounded-xl shadow-md transform hover:scale-105 transition"
+                  className="px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg font-semibold text-white 
+                    bg-gradient-to-r from-green-500 to-green-700 
+                    hover:from-green-600 hover:to-green-800 
+                    transition duration-300 transform hover:scale-105 shadow-md"
                 >
                   Update
                 </button>
                 <button
                   onClick={() => handleDelete(event._id)}
-                  className="px-5 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl shadow-md transform hover:scale-105 transition"
+                  className="px-3 sm:px-5 py-1.5 sm:py-2 rounded-lg font-semibold text-white 
+                    bg-gradient-to-r from-red-500 via-pink-500 to-red-700 
+                    hover:from-red-600 hover:via-pink-600 hover:to-red-800 
+                    transition duration-300 transform hover:scale-105 shadow-md"
                 >
                   Delete
                 </button>
@@ -104,6 +116,7 @@ const ManageEvents = () => {
     </div>
   )}
 </div>
+
 
   );
 };

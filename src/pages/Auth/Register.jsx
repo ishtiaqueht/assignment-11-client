@@ -79,113 +79,118 @@ const Register = () => {
       });
   };
   return (
-    <div className="register flex justify-center items-center min-h-screen px-4">
-  <div className="card bg-white w-full max-w-sm shrink-0 shadow-2xl py-6 rounded-2xl border border-blue-200">
-    <h2 className="font-bold text-2xl text-center text-blue-600 mb-5">
-      Register your account
-    </h2>
-    <form onSubmit={handleRegister} className="card-body px-6">
-      <fieldset className="space-y-4">
-        {/* Name */}
-        <label className="block font-semibold text-gray-700">Name</label>
-        <input
-          name="name"
-          type="text"
-          className="input w-full rounded-xl border border-blue-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="Name"
-          required
-        />
-        {nameError && <p className="text-xs text-red-600">{nameError}</p>}
+    <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-white px-4">
+      {/* Glow background */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-20 -left-20 h-72 w-72 rounded-full bg-blue-300/20 blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-indigo-400/20 blur-3xl" />
+      </div>
 
-        {/* Photo URL */}
-        <label className="block font-semibold text-gray-700">Photo URL</label>
-        <input
-          name="photo"
-          type="text"
-          className="input w-full rounded-xl border border-blue-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="Photo URL"
-          required
-        />
+      <div className="relative z-10 w-full max-w-md rounded-3xl border border-blue-100 bg-white/80 p-8 shadow-2xl backdrop-blur-xl">
+        <h2 className="mb-6 text-center text-3xl font-bold tracking-tight text-blue-700">
+          Register your account
+        </h2>
 
-        {/* Email */}
-        <label className="block font-semibold text-gray-700">Email</label>
-        <input
-          name="email"
-          type="email"
-          autoComplete="off"
-          className="input w-full rounded-xl border border-blue-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="Email"
-          required
-        />
+        <form onSubmit={handleRegister} className="space-y-5">
+          {/* Name */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700">Name</label>
+            <input
+              name="name"
+              type="text"
+              className="mt-2 w-full rounded-xl border border-blue-200 px-4 py-3 text-sm shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter your name"
+              required
+            />
+            {nameError && <p className="text-xs font-medium text-red-600">{nameError}</p>}
+          </div>
 
-        {/* Password */}
-        <label className="block font-semibold text-gray-700">Password</label>
-        <input
-          name="password"
-          type="password"
-          autoComplete="new-password"
-          className="input w-full rounded-xl border border-blue-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          placeholder="Password"
-          required
-        />
-        {passwordError && <p className="text-xs text-red-600">{passwordError}</p>}
+          {/* Photo URL */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700">Photo URL</label>
+            <input
+              name="photo"
+              type="text"
+              className="mt-2 w-full rounded-xl border border-blue-200 px-4 py-3 text-sm shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter photo URL"
+              required
+            />
+          </div>
 
-        {/* Register Button */}
-        <button
-          type="submit"
-          className="btn mt-4 w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-600 text-white font-semibold rounded-xl transition"
-        >
-          Register
-        </button>
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700">Email</label>
+            <input
+              name="email"
+              type="email"
+              autoComplete="off"
+              className="mt-2 w-full rounded-xl border border-blue-200 px-4 py-3 text-sm shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Enter your email"
+              required
+            />
+          </div>
 
-        {/* Login Link */}
-        <p className="font-semibold text-center pt-5 text-gray-700">
-          Already have an account?{" "}
-          <Link className="text-blue-600 hover:underline" to="/login">
-            Login
-          </Link>
-        </p>
+          {/* Password */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700">Password</label>
+            <input
+              name="password"
+              type="password"
+              autoComplete="new-password"
+              className="mt-2 w-full rounded-xl border border-blue-200 px-4 py-3 text-sm shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Create a password"
+              required
+            />
+            {passwordError && <p className="text-xs font-medium text-red-600">{passwordError}</p>}
+          </div>
 
-        <div className="divider text-blue-300">OR</div>
-
-        {/* Google Login */}
-        <button
-          onClick={handleGoogleLogin}
-          className="btn w-full bg-blue-500 hover:bg-blue-600 text-white rounded-xl flex items-center justify-center gap-2 transition"
-        >
-          <svg
-            aria-label="Google logo"
-            width="16"
-            height="16"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
+          {/* Register Button */}
+          <button
+            type="submit"
+            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-500 px-6 py-3 font-semibold text-white shadow-md transition hover:from-blue-500 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
           >
-            <g>
-              <path d="m0 0H512V512H0" fill="#fff"></path>
-              <path
-                fill="#34a853"
-                d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
-              ></path>
-              <path
-                fill="#4285f4"
-                d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
-              ></path>
-              <path
-                fill="#fbbc02"
-                d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
-              ></path>
-              <path
-                fill="#ea4335"
-                d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
-              ></path>
-            </g>
-          </svg>
-          Login with Google
-        </button>
-      </fieldset>
-    </form>
-  </div>
-</div>
+            Register
+          </button>
+
+          {/* Login Link */}
+          <p className="pt-4 text-center text-sm font-medium text-gray-700">
+            Already have an account?{' '}
+            <Link className="text-blue-600 hover:underline" to="/login">
+              Login
+            </Link>
+          </p>
+
+          {/* Divider */}
+          <div className="relative my-6 flex items-center">
+            <div className="h-px flex-1 bg-blue-200"></div>
+            <span className="mx-4 text-xs font-semibold uppercase tracking-wider text-blue-400">OR</span>
+            <div className="h-px flex-1 bg-blue-200"></div>
+          </div>
+
+          {/* Google Login */}
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="flex w-full items-center justify-center gap-2 rounded-xl border border-blue-200 bg-white px-6 py-3 font-medium text-gray-700 shadow-sm transition hover:bg-blue-50 hover:text-blue-700"
+          >
+            <svg
+              aria-label="Google logo"
+              width="18"
+              height="18"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+            >
+              <path fill="#fff" d="M0 0h512v512H0z"></path>
+              <path fill="#34a853" d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341" />
+              <path fill="#4285f4" d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57" />
+              <path fill="#fbbc02" d="m90 341a208 200 0 010-171l63 49q-12 37 0 73" />
+              <path fill="#ea4335" d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55" />
+            </svg>
+            Continue with Google
+          </button>
+        </form>
+      </div>
+    </div>
 
   );
 };

@@ -16,7 +16,7 @@ const EventsPage = () => {
       const res = await axios.get("https://assignment-11-server-self-psi.vercel.app/events");
       setEvents(res.data);
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     } finally {
       setLoading(false);
     }

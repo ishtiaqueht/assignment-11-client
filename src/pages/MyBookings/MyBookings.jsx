@@ -23,7 +23,7 @@ const MyBookings = () => {
         const res = await axiosSecure.get(`/myBookings?email=${user.email}`);
         setBookings(res.data);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
       } finally {
         setLoading(false);
       }
@@ -55,7 +55,7 @@ const MyBookings = () => {
             );
           }
         } catch (err) {
-          console.error(err);
+          // console.error(err);
           Swal.fire("Error", "Failed to cancel booking.", "error");
         }
       }

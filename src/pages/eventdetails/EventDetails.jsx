@@ -4,6 +4,7 @@ import axios from "axios";
 import { AuthContext } from "../../provider/AuthProvider";
 import useDynamicTitle from "../../hooks/useDynamicTitle";
 import useAxiosSecure from "../../api/useAxiosSecure";
+import { toast } from "react-toastify";
 const EventDetails = () => {
   useDynamicTitle("Event(details) | AthleticClub");
   const { id } = useParams();
@@ -17,7 +18,7 @@ const EventDetails = () => {
     axios
       .get(`https://assignment-11-server-self-psi.vercel.app/events/${id}`)
       .then((res) => setEvent(res.data))
-      .catch((err) => console.error(err))
+      .catch((err) => )
       .finally(() => setLoading(false));
   }, [id]);
 
@@ -42,10 +43,12 @@ const handleBooking = async () => {
 
     if (res.data.insertedId) {
       setSuccess("✅ Booking successful!");
+      toast.success("event booked successfully!");
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     setSuccess("❌ Something went wrong!");
+    toast.error("Event is already booked!");
   }
 };
 

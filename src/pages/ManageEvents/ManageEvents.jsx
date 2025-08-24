@@ -20,7 +20,7 @@ const ManageEvents = () => {
           const res = await axiosSecure.get(`/manageEvents?email=${user.email}`);
           setEvents(res.data);
         } catch (err) {
-          console.error(err);
+          // console.error(err);
         }
       };
       fetchEvents();
@@ -50,7 +50,7 @@ const ManageEvents = () => {
             icon: "success",
           });
         } catch (err) {
-          console.error(err);
+          // console.error(err);
           Swal.fire("Error", "Failed to delete event.", "error");
         }
       }

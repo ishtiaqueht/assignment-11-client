@@ -18,7 +18,7 @@ const EventDetails = () => {
     axios
       .get(`https://assignment-11-server-self-psi.vercel.app/events/${id}`)
       .then((res) => setEvent(res.data))
-      .catch((err) => )
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [id]);
 
@@ -46,9 +46,9 @@ const handleBooking = async () => {
       toast.success("event booked successfully!");
     }
   } catch (error) {
-    // console.error(error);
+    console.error(error);
     setSuccess("❌ Something went wrong!");
-    toast.error("Event is already booked!");
+    toast.error("Event is booked")
   }
 };
 

@@ -34,12 +34,12 @@ const MakeEvent = () => {
     // ✅ POST request using axiosSecure
     const res = await axiosSecure.post("/events", formData);
 
-    // console.log(res.data);
+    console.log(res.data);
     toast.success("Event Created Successfully");
 
     navigate("/events");
   } catch (error) {
-    // console.error(error);
+    console.error(error);
     toast.error("Failed to create event");
   }
 };

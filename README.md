@@ -1,12 +1,43 @@
-# React + Vite
+# Assignment 11 Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Purpose
+This project is a client-side application for managing and booking athletic events. Users can view event details, create events, book events, and manage their bookings. Built with React, Tailwind CSS, and Firebase.
 
-Currently, two official plugins are available:
+## Live URL
+[Live Demo](https://assignment-11-bf26f.web.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
+- View upcoming athletic events with detailed information
+- User authentication using Firebase
+- Create, update, and delete events (for authenticated users)
+- Book events and manage bookings
+- Responsive design with Tailwind CSS
+- Notifications using React Toastify and SweetAlert2
+- Smooth animations with Framer Motion
+- Carousel for featured events
 
-## Expanding the ESLint configuration
+## NPM Packages Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Dependencies
+- `react` & `react-dom` — Core React libraries  
+- `react-router` — Routing in React  
+- `axios` — HTTP client  
+- `firebase` — Authentication & database  
+- `react-icons` — Icons  
+- `react-toastify` — Toast notifications  
+- `sweetalert2` — Alert & confirmation dialogs  
+- `framer-motion` — Animations  
+- `tailwindcss` & `@tailwindcss/vite` — Styling  
+- `react-responsive-carousel` — Carousel component  
+
+### Dev Dependencies
+- `vite` & `@vitejs/plugin-react` — Development & build tools  
+- `eslint` & related plugins — Code linting  
+- `daisyui` — Tailwind CSS components  
+- `@types/react` & `@types/react-dom` — TypeScript support  
+
+## Scripts
+- `npm run dev` — Start development server  
+- `npm run build` — Build project for production  
+- `npm run preview` — Preview production build  
+- `npm run lint` — Lint project code  

@@ -36,7 +36,7 @@ const UpdateEvent = () => {
           location: event.location || "",
         });
       } catch (err) {
-        // console.error(err);
+        console.error(err);
         toast.error("Failed to fetch event details");
       } finally {
         setLoading(false);
@@ -58,7 +58,7 @@ const UpdateEvent = () => {
       toast.success("Event updated successfully!");
       navigate("/manageEvents");
     } catch (error) {
-      // console.error(error);
+      console.error(error);
       toast.error("Failed to update event");
     }
   };

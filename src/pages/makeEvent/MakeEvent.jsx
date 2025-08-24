@@ -2,8 +2,12 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import useDynamicTitle from "../../hooks/useDynamicTitle";
+import useAxiosSecure from "../../api/useAxiosSecure";
 
 const MakeEvent = () => {
+  useDynamicTitle("Create Event | AthleticClub");
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -24,25 +28,22 @@ const MakeEvent = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const res = await fetch("http://localhost:3000/events", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+  try {
+    // ✅ POST request using axiosSecure
+    const res = await axiosSecure.post("/events", formData);
 
-      const data = await res.json();
-      console.log(data);
-      toast.success("Event Created Successfully");
+    console.log(res.data);
+    toast.success("Event Created Successfully");
 
-      navigate("/events");
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to create event");
-    }
-  };
+    navigate("/events");
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to create event");
+  }
+};
+
 
   return (
     <div className="max-w-4xl mx-auto my-12 px-6 sm:px-10 py-10 bg-white shadow-2xl rounded-3xl">

@@ -3,8 +3,10 @@ import Banner from "./Banner";
 import FeaturedEvents from "./FeaturedEvents";
 import PopularSports from "./PopularSports";
 import Testimonials from "./Testimonials";
+import useDynamicTitle from "../../hooks/useDynamicTitle";
 
 const Home = () => {
+  useDynamicTitle("Home | AthleticClub");
   return (
     <div>
       <section className="mb-24">

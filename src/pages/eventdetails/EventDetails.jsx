@@ -2,8 +2,12 @@ import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
 import { AuthContext } from "../../provider/AuthProvider";
+import useDynamicTitle from "../../hooks/useDynamicTitle";
+import useAxiosSecure from "../../api/useAxiosSecure";
 const EventDetails = () => {
+  useDynamicTitle("Event(details) | AthleticClub");
   const { id } = useParams();
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,13 +15,13 @@ const EventDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/events/${id}`)
+      .get(`https://assignment-11-server-self-psi.vercel.app/events/${id}`)
       .then((res) => setEvent(res.data))
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [id]);
 
- const handleBooking = async () => {
+const handleBooking = async () => {
   if (!user) {
     alert("Please login to book this event!");
     return;
@@ -33,7 +37,8 @@ const EventDetails = () => {
       userEmail: user.email,
     };
 
-    const res = await axios.post("http://localhost:3000/bookings", bookingData);
+    // ✅ POST request now using axiosSecure
+    const res = await axiosSecure.post("/bookings", bookingData);
 
     if (res.data.insertedId) {
       setSuccess("✅ Booking successful!");
@@ -43,6 +48,7 @@ const EventDetails = () => {
     setSuccess("❌ Something went wrong!");
   }
 };
+
 
 
   if (loading) return <p className="text-center mt-10">Loading event details...</p>;

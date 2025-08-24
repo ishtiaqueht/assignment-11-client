@@ -8,7 +8,7 @@ const FeaturedEvents = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/events")
+    axios.get("https://assignment-11-server-self-psi.vercel.app/events")
       .then(res => {
         const sorted = res.data.sort((a, b) => new Date(a.date) - new Date(b.date));
         // Top 6 events

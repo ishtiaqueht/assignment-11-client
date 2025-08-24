@@ -2,8 +2,10 @@ import React, { use, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../../provider/AuthProvider";
 import { toast } from "react-toastify";
+import useDynamicTitle from "../../hooks/useDynamicTitle";
 
 const Login = () => {
+   useDynamicTitle("Login | AthleticClub");
   const [error, setError] = useState("");
   const { signIn, signInWithGoogle, resetPassword } = use(AuthContext);
   const location = useLocation();

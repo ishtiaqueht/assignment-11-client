@@ -1,7 +1,9 @@
 import { Link, useRouteError } from "react-router";
 import { motion } from "framer-motion";
+import useDynamicTitle from "../hooks/useDynamicTitle";
 
 export default function NotFound() {
+  useDynamicTitle("Error | AthleticClub");
   const error = useRouteError() || null;
 const message = (error && (error.statusText || error.message)) 
   || "The page you're looking for doesn't exist.";

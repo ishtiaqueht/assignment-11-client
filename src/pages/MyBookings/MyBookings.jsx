@@ -3,21 +3,24 @@ import axios from "axios";
 import { AuthContext } from "../../provider/AuthProvider";
 import Swal from "sweetalert2";
 import BookingFormatCard from "./BookingFormatCard";
+import useDynamicTitle from "../../hooks/useDynamicTitle";
+import useAxiosSecure from "../../api/useAxiosSecure";
 
 const MyBookings = () => {
+  useDynamicTitle("My Bookings | AthleticClub");
+  const axiosSecure = useAxiosSecure()
   const { user } = useContext(AuthContext);
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState("table"); // 👈 toggle state
 
   // Fetch bookings
-  useEffect(() => {
+   useEffect(() => {
     if (!user) return;
+
     const fetchBookings = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:3000/myBookings?email=${user.email}`
-        );
+        const res = await axiosSecure.get(`/myBookings?email=${user.email}`);
         setBookings(res.data);
       } catch (err) {
         console.error(err);
@@ -25,9 +28,11 @@ const MyBookings = () => {
         setLoading(false);
       }
     };
-    fetchBookings();
-  }, [user]);
 
+    fetchBookings();
+  }, [user, axiosSecure]);
+
+  // Delete booking
   const handleDelete = (_id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -37,17 +42,22 @@ const MyBookings = () => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, cancel it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        axios
-          .delete(`http://localhost:3000/bookings/${_id}`)
-          .then((res) => {
-            if (res.data.deletedCount > 0) {
-              setBookings(bookings.filter((b) => b._id !== _id));
-              Swal.fire("Cancelled!", "Your booking has been cancelled.", "success");
-            }
-          })
-          .catch((err) => console.error(err));
+        try {
+          const res = await axiosSecure.delete(`/bookings/${_id}`);
+          if (res.data.deletedCount > 0) {
+            setBookings(bookings.filter((b) => b._id !== _id));
+            Swal.fire(
+              "Cancelled!",
+              "Your booking has been cancelled.",
+              "success"
+            );
+          }
+        } catch (err) {
+          console.error(err);
+          Swal.fire("Error", "Failed to cancel booking.", "error");
+        }
       }
     });
   };

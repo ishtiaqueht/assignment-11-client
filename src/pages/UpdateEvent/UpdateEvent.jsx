@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router";
-import axios from "axios";
 import { toast } from "react-toastify";
+import useDynamicTitle from "../../hooks/useDynamicTitle";
+import useAxiosSecure from "../../api/useAxiosSecure";
 
 const UpdateEvent = () => {
+  useDynamicTitle("Update Event | AthleticClub");
+  const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -20,9 +23,9 @@ const UpdateEvent = () => {
 
   // Fetch event details
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/events/${id}`)
-      .then((res) => {
+    const fetchEvent = async () => {
+      try {
+        const res = await axiosSecure.get(`/events/${id}`);
         const event = res.data;
         setFormData({
           eventName: event.eventName || "",
@@ -32,10 +35,16 @@ const UpdateEvent = () => {
           imageUrl: event.imageUrl  || "",
           location: event.location || "",
         });
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setLoading(false));
-  }, [id]);
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to fetch event details");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvent();
+  }, [id, axiosSecure]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +54,7 @@ const UpdateEvent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/events/${id}`, formData);
+      await axiosSecure.put(`/events/${id}`, formData);
       toast.success("Event updated successfully!");
       navigate("/manageEvents");
     } catch (error) {
@@ -63,6 +72,7 @@ const UpdateEvent = () => {
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Event Name */}
         <div>
           <label className="block mb-2 font-medium text-gray-700">Event Name</label>
           <input
@@ -75,6 +85,7 @@ const UpdateEvent = () => {
           />
         </div>
 
+        {/* Event Type */}
         <div>
           <label className="block mb-2 font-medium text-gray-700">Event Type</label>
           <select
@@ -94,6 +105,7 @@ const UpdateEvent = () => {
           </select>
         </div>
 
+        {/* Event Date */}
         <div>
           <label className="block mb-2 font-medium text-gray-700">Event Date</label>
           <input
@@ -106,6 +118,7 @@ const UpdateEvent = () => {
           />
         </div>
 
+        {/* Location */}
         <div>
           <label className="block mb-2 font-medium text-gray-700">Location</label>
           <input
@@ -119,6 +132,7 @@ const UpdateEvent = () => {
           />
         </div>
 
+        {/* Description */}
         <div>
           <label className="block mb-2 font-medium text-gray-700">Description</label>
           <textarea
@@ -131,6 +145,7 @@ const UpdateEvent = () => {
           />
         </div>
 
+        {/* Image URL */}
         <div>
           <label className="block mb-2 font-medium text-gray-700">Event Image URL</label>
           <input

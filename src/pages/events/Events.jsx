@@ -3,15 +3,17 @@ import { Link } from "react-router";
 import axios from "axios";
 import { MdOutlineDateRange } from "react-icons/md";
 import { FaMapPin } from "react-icons/fa";
+import useDynamicTitle from "../../hooks/useDynamicTitle";
 
 const EventsPage = () => {
+  useDynamicTitle("Events | AthleticClub");
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
 
   const fetchEvents = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/events");
+      const res = await axios.get("https://assignment-11-server-self-psi.vercel.app/events");
       setEvents(res.data);
     } catch (err) {
       console.error(err);
